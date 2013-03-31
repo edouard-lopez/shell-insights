@@ -5,6 +5,7 @@
 #
 
 sed -i '/shell-stats.bash/d' "$HISTFILE" # remove references to the script
+
 scriptDir="$(dirname "$0")" # emplacement du script
 
 shellList=( "bash" "csh" "ksh" "sh" "tsh" "zsh" )
@@ -59,8 +60,18 @@ function tshCrawler() {
 # @description  crawl Zsh history
 function zshCrawler() {
     printf "%s\n" "Zsh"
-    cut -d ';' -f 2- "$historyFile" | awk -f "$scriptDir"/crawler-zsh.awk
+    cut -d ';' -f 2- "$historyFile" \
+      | commandSplitter
+      # | perl -p -e 's/ \-{,2}[\w\d]+//g' \
+      # | awk -f "$scriptDir"/crawler-zsh.awk \
+      # | sort -n
 }
 
+function commandSplitter() {
+  while read input
+  do
+    awk 'BEGIN{ FS="[ \t;&\|=]" } { for (i=1; i<=NF; i++) print $i}'
+  done
+}
 
 loopShells "${shellList[@]}"
