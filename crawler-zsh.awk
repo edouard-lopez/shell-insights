@@ -6,7 +6,10 @@
 
 # executed before any of the input -files- are read
 BEGIN {
+}
 
+/=/ { # variable line
+  var[$1]++
 }
 
 { #
@@ -15,5 +18,6 @@ BEGIN {
 
 # executed after any of the input -files- are read
 END {
+  for (v in var) print var[v] " " v
 
 }
