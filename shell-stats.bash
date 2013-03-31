@@ -12,19 +12,13 @@ shellList=( "bash" "csh" "ksh" "sh" "tsh" "zsh" )
 # @description For all shell, we look at the history file
 #
 function loopShells() {
-    for s in "${shellList[@]}";
+    for shell in "${shellList[@]}";
     do
-        crawlHistory "$s"
+      printf -v historyFile "%s/.%s_history" "$HOME" "$shell"
+        "$shell"Crawler # call the right crawler
     done
 }
 
-
-function crawlHistory() {
-    shell="$1"
-
-    printf -v historyFile "%s/.%s_history" "$HOME" "$shell"
-    "$shell"Crawler
-}
 
 # @description  crawl Bash history
 function bashCrawler() {
