@@ -4,6 +4,7 @@
 # USAGE
 #
 
+sed -i '/shell-stats.bash/d' "$HISTFILE" # remove references to the script
 scriptDir="$(dirname "$0")" # emplacement du script
 
 shellList=( "bash" "csh" "ksh" "sh" "tsh" "zsh" )
