@@ -15,7 +15,13 @@ function loopShells() {
     for shell in "${shellList[@]}";
     do
       printf -v historyFile "%s/.%s_history" "$HOME" "$shell"
+
+      if [[ -e "$historyFile" || -f "$historyFile" ]];
+      then
         "$shell"Crawler # call the right crawler
+      else
+        printf "skipping %s\n" "$shell"
+      fi
     done
 }
 
