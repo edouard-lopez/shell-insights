@@ -11,10 +11,19 @@ BEGIN {
 }
 
 
-{ #
-    cmd[$1]++
+# For each lines in the file
+{
+    #print "$0: ", $0
+    cmdKey=""
+
+    for (i=1; i < NF; i++) {
+        cmdKey = cmdKey ";" $i
+        cmdList[cmdKey]++
+    }
 }
+
 
 # executed after any of the input -files- are read
 END {
+    for (c in cmdList) print cmdList[c] " " c
 }
