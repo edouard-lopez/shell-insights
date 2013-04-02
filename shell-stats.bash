@@ -55,13 +55,19 @@ function tshCrawler() {
   awk -f "$scriptDir"/crawler-tsh.awk "$historyFile"
 }
 
+
 # @description  crawl Zsh history
 function zshCrawler() {
-    printf "%s\n" "Zsh"
-    cut -d ';' -f 2- "$historyFile" \
-      # | perl -p -e 's/ \-{,2}[\w\d]+//g' \
-      # | awk -f "$scriptDir"/crawler-zsh.awk \
+  printf "%s\n" "Zsh"
+  cut -d ';' -f 2- "$historyFile" \
+  | splitLine \
+  | removeComment \
+  | awk -f "$scriptDir"/crawler-zsh.awk \
+  | sort -k 2
       # | sort -n
+      # | keepOnlyCommand
+      # | perl -p -e 's/ \-{,2}[\w\d]+//g' \
+  }
 
 
 # @description remove comment from command line
@@ -81,10 +87,6 @@ done
 }
 
 
-  while read input
-  do
-    awk 'BEGIN{ FS="[ \t;&\|=]" } { for (i=1; i<=NF; i++) print $i}'
-  done
 }
 
 loopShells "${shellList[@]}"
