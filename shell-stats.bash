@@ -63,6 +63,14 @@ function zshCrawler() {
       # | perl -p -e 's/ \-{,2}[\w\d]+//g' \
       # | awk -f "$scriptDir"/crawler-zsh.awk \
       # | sort -n
+
+
+# @description remove comment from command line
+function removeComment() {
+  while read input
+  do
+    cut -d '#' -f -2
+done
 }
 
 function commandSplitter() {
