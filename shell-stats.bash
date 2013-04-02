@@ -4,7 +4,6 @@
 # USAGE
 #
 
-sed -i '/shell-stats.bash/d' "$HISTFILE" # remove references to the script
 
 scriptDir="$(dirname "$0")" # emplacement du script
 
@@ -19,6 +18,7 @@ function loopShells() {
 
       if [[ -e "$historyFile" || -f "$historyFile" ]];
       then
+        $(sed -i '/shell-stats.bash/d' "$historyFile") # remove references to the script
         "$shell"Crawler # call the right crawler
       else
         printf "skipping %s\n" "$shell"
