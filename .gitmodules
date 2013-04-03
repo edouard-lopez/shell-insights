@@ -1,0 +1,3 @@
+[submodule "jshon"]
+	path = jshon
+	url = git://github.com/keenerd/jshon.git
