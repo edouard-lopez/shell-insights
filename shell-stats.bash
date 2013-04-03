@@ -58,16 +58,15 @@ function tshCrawler() {
 
 # @description  crawl Zsh history
 function zshCrawler() {
-  printf "%s\n" "Zsh"
-  cut -d ';' -f 2- "$historyFile" \
-  | splitLine \
-  | removeComment \
-  | awk -f "$scriptDir"/crawler-zsh.awk \
-  | sort -k 2
-      # | sort -n
-      # | keepOnlyCommand
-      # | perl -p -e 's/ \-{,2}[\w\d]+//g' \
-  }
+    printf "%s\n" "Zsh"
+    cut -d ';' -f 2- "$historyFile" \
+    | splitLine \
+    | removeComment \
+    | awk -f "$scriptDir"/crawler-zsh.awk | sed 's/^ //g' \
+    | sort -k 2 \
+    | toJSON  > "$scriptDir"/output.json
+    # | toJSON  | tee "$scriptDir"/output.json
+}
 
 
 # @description remove comment from command line
@@ -86,6 +85,25 @@ function splitLine() {
 done
 }
 
+
+function toJSON() {
+    cmds=()
+    JSON='{}'
+    i=0
+
+    printf "{\n"
+    # use NUL delimiter as separator, hence 2 call to 'read'
+    # IFS presence prevent trailing whitespaces to be stripped off
+    # so we get byte-for-byte content
+    while IFS='' read -r -d '' cmdKey && IFS='' read -r -d '' count;
+    do
+        cmds+=( -s "$cmdKey" -i "cmd"  -s "$count" -i "size")
+        cmd=( -s "$cmdKey" -i "cmd"  -s "$count" -i "size" )
+        object="$("$scriptDir"/jshon/jshon "${cmd[@]}"<<<$JSON )"
+        printf "\"%s\": %s, \n" "$i" "$object"
+        let "i++"
+    done
+    printf "\n}"
 
 }
 
