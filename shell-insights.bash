@@ -94,7 +94,6 @@ done
 
 
 function toJSON() {
-    cmds=()
     i=0
     local globalWrap=( '[' ']' ) # array: [] or object: {}
     local cmdWrap='{}'
@@ -105,9 +104,6 @@ function toJSON() {
     # so we get byte-for-byte content
     while IFS='' read -r -d '' cmdKey && IFS='' read -r -d '' count;
     do
-        cmds+=( -s "$cmdKey" -i "cmd"  -s "$count" -i "size")
-        cmd=( -s "$cmdKey" -i "cmd"  -s "$count" -i "size" )
-        object="$("$scriptDir"/jshon/jshon "${cmd[@]}"<<<$JSON )"
         printf "\"%s\": %s, \n" "$i" "$object"
         object="$("$scriptDir"/jshon/jshon "${cmd[@]}"<<<$cmdWrap )"
         let "i++"
