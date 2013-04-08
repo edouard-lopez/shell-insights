@@ -90,6 +90,13 @@ function draw(data) {
         .attr('width', x.rangeBand())
         .attr('y', function (d) { return y(d.size)-5; });
 
+    // add command
+    bar.append('text')
+        .text(function (d) { return d.cmd; })
+        .attr('x', function (d) { return x(d.cmd); })
+        .attr('width', x.rangeBand())
+        .attr('y', function (d) { return y(d.size)-5; });
+
 
 }
 
