@@ -31,6 +31,16 @@ function draw(data) {
         .orient('left')
         .tickFormat(occurencesFormat);
 
+
+    // add canvas to container
+    var svg = d3.select('#insights')
+                        .append('svg')
+                        .attr('id', 'chart')
+                        .attr('width', width+ margin.left + margin.right)
+                        .attr('height', height+ margin.top + margin.bottom)
+                        .append('g')
+                        .attr('transform', 'translate(' + margin.left + ',' + margin.right + ')');
+
 }
 
 
