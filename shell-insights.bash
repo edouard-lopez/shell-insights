@@ -13,6 +13,8 @@
 
 scriptDir="$(dirname "$0")" # emplacement du script
 
+outputDir='./app/data/' # yeoman hierarchy
+
 shellList=( "bash" "csh" "ksh" "sh" "tsh" "zsh" )
 
 # @description For all shell, we look at the history file
@@ -71,8 +73,8 @@ function zshCrawler() {
     | removeComment \
     | awk -f "$scriptDir"/crawler-zsh.awk | sed 's/^ //g' \
     | sort -k 2 \
-    | toJSON  > "$scriptDir"/output.json
-    # | toJSON  | tee "$scriptDir"/output.json
+    | toJSON  > "$scriptDir"/"$outputDir"/output.json
+    # | toJSON  | tee "$scriptDir"/"$outputDir"/output.json
 }
 
 
