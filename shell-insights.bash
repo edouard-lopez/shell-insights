@@ -94,9 +94,9 @@ done
 
 
 function toJSON() {
-    i=0
     local globalWrap=( '[' ']' ) # array: [] or object: {}
     local cmdWrap='{}'
+    local i=0 # used as object index
 
     printf "%s\n" "${globalWrap[0]}"
     # use NUL delimiter as separator, hence 2 call to 'read'
@@ -104,6 +104,7 @@ function toJSON() {
     # so we get byte-for-byte content
     while IFS='' read -r -d '' cmdKey && IFS='' read -r -d '' count;
     do
+        (( $i > 0 )) && printf ",\n"
         cmd=( -s "$cmdKey" -i "cmd"  -n "$count" -i "size" )
         object="$("$scriptDir"/jshon/jshon "${cmd[@]}"<<<$cmdWrap )"
         printf "%s" "$object" # create [{ object }, ...]
