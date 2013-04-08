@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 # DESCRIPTION
+# Build a JSON array holding statistics about your command history. Structure is as follow
+# [
+#   {
+#      'cmd': "echo 'string'", // JSON-escaped command
+#      'size': 5 // number of occurences
+#   }
+# ]
 #
 # USAGE
-#
+# ./shell-insights.bash
 
 scriptDir="$(dirname "$0")" # emplacement du script
 
