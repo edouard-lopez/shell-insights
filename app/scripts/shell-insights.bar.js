@@ -8,6 +8,7 @@ function draw(data) {
     width = data.length*10 - (margin.left + margin.right),
     height = 500 - (margin.top + margin.bottom);
 
+
     // Scales declaration
     var x = d3.scale.ordinal()
         .rangeRoundBands([0, width], 0.25)
@@ -18,6 +19,17 @@ function draw(data) {
     var y = d3.scale.linear()
                      .range([height, margin.top])
                      .domain([0, d3.max(data, function (d) { return d.size; })]);
+
+
+    // Axis declaration
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient('bottom');
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient('left')
+        .tickFormat(occurencesFormat);
 
 }
 
