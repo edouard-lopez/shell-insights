@@ -75,6 +75,14 @@ function draw(data) {
                         .append('g')
                         .attr('class', 'bar');
 
+    // add the bar representing # of occurences for a given command
+    bar.append('rect')
+        .attr('class', 'cmd')
+        .attr('x', function (d) { return x(d.cmd); })
+        .attr('width', x.rangeBand())
+        .attr('y', function (d) { return y(d.size); })
+        .attr('height', function (d) { return height - y(d.size); });
+
 
 }
 
