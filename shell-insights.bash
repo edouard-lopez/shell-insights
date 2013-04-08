@@ -105,6 +105,7 @@ function toJSON() {
     while IFS='' read -r -d '' cmdKey && IFS='' read -r -d '' count;
     do
         printf "\"%s\": %s, \n" "$i" "$object"
+        cmd=( -s "$cmdKey" -i "cmd"  -n "$count" -i "size" )
         object="$("$scriptDir"/jshon/jshon "${cmd[@]}"<<<$cmdWrap )"
         let "i++"
     done
