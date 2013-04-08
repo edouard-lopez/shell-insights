@@ -1,0 +1,15 @@
+[Desktop Entry]
+Icon=./.favicon.png
+
+[Dolphin]
+AdditionalInfo=63
+AdditionalInfoV2=Details_Size,Details_Date,Details_Permissions,Details_Owner,Details_Group,Details_Type,CustomizedDetails
+ShowPreview=false
+SortOrder=0
+Sorting=6
+Timestamp=2011,1,30,16,54,34
+Version=2
+ViewMode=1
+
+[Settings]
+ShowDotFiles=true
