@@ -64,6 +64,9 @@ function draw(data) {
             .style('text-anchor', 'end')
             .text('# of occurences');
 
+    // Add area to holds bars
+    svg.append('g').attr('id', 'bars');
+
 }
 
 
