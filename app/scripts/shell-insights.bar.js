@@ -41,6 +41,29 @@ function draw(data) {
                         .append('g')
                         .attr('transform', 'translate(' + margin.left + ',' + margin.right + ')');
 
+    // Add X and Y axis to canvas
+    // Appends X-axis
+    svg.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(xAxis)
+            .selectAll('text')
+            .style('text-anchor', 'end')
+            .attr('dx', '-.8em')
+            .attr('dy', '.15em')
+            .attr('transform', 'rotate(-65)');
+
+    // Appends Y-axis
+    svg.append('g')
+        .attr('class', 'y axis')
+        .call(yAxis) // insert the axis
+            .append('text')
+            .attr('transform', 'rotate(-90)')
+            .attr('y', 6)
+            .attr('dy', '.71em')
+            .style('text-anchor', 'end')
+            .text('# of occurences');
+
 }
 
 
