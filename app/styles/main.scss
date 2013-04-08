@@ -21,6 +21,31 @@ body {
     stroke: #000;
     shape-rendering: crispEdges;
 }
+.axis > .tick > text {
+    fill: #aaa;
+}
+.axis.x > .tick {}
+
+.bar > rect {
+    fill: #ccff66;
+}
+.bar:hover > rect {
+    fill: #9966ff;
+    stroke: #87a843;
+    stroke-width: 1px;
+    stroke-bottom-width: 0;
+}
+.bar > text {
+    display: none;
+    font-size: smaller;
+}
+.bar:hover > text {
+    display: block;
+    fill: #aaa;
+}
+.x.axis path {
+    // display: none;
+}
 
 label {
     position: absolute;
