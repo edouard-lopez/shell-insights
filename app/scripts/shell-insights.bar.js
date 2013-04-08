@@ -83,6 +83,13 @@ function draw(data) {
         .attr('y', function (d) { return y(d.size); })
         .attr('height', function (d) { return height - y(d.size); });
 
+    // add # of occurences
+    bar.append('text')
+        .text(function (d) { return d.size+' × '; })
+        .attr('x', function (d) { return x(d.cmd) - ((d.size.toString().length+10)*2); })
+        .attr('width', x.rangeBand())
+        .attr('y', function (d) { return y(d.size)-5; });
+
 
 }
 
