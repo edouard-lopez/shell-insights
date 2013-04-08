@@ -64,8 +64,17 @@ function draw(data) {
             .style('text-anchor', 'end')
             .text('# of occurences');
 
+
     // Add area to holds bars
     svg.append('g').attr('id', 'bars');
+
+    // add a group to hold bar and related data
+    var bar = svg.select('#bars').selectAll('rect.cmd')
+                        .data(data)
+                        .enter()
+                        .append('g')
+                        .attr('class', 'bar');
+
 
 }
 
