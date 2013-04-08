@@ -95,10 +95,11 @@ done
 
 function toJSON() {
     cmds=()
-    JSON='{}'
     i=0
+    local globalWrap=( '[' ']' ) # array: [] or object: {}
+    local cmdWrap='{}'
 
-    printf "{\n"
+    printf "%s\n" "${globalWrap[0]}"
     # use NUL delimiter as separator, hence 2 call to 'read'
     # IFS presence prevent trailing whitespaces to be stripped off
     # so we get byte-for-byte content
@@ -108,9 +109,10 @@ function toJSON() {
         cmd=( -s "$cmdKey" -i "cmd"  -s "$count" -i "size" )
         object="$("$scriptDir"/jshon/jshon "${cmd[@]}"<<<$JSON )"
         printf "\"%s\": %s, \n" "$i" "$object"
+        object="$("$scriptDir"/jshon/jshon "${cmd[@]}"<<<$cmdWrap )"
         let "i++"
     done
-    printf "\n}"
+    printf "\n%s" "${globalWrap[1]}"
 
 }
 
